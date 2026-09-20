@@ -21,59 +21,52 @@ jobs:
           rm -rf .rwsc-build
           mkdir -p .rwsc-build
           unzip -q releases/rar-woo-smart-courier-v1.3.0.zip -d .rwsc-build
-          SRC=".rwsc-build/rar-woo-smart-courier/rar-woo-smart-courier.php"
-          test -f "$SRC"
-
+          test -f .rwsc-build/rar-woo-smart-courier/rar-woo-smart-courier.php
           python3 - <<'PY'
           from pathlib import Path
 
-          src = Path(".rwsc-build/rar-woo-smart-courier/rar-woo-smart-courier.php").read_text(encoding="utf-8")
+          src_path = Path(".rwsc-build/rar-woo-smart-courier/rar-woo-smart-courier.php")
+          src = src_path.read_text(encoding="utf-8")
           marker = "if ( ! defined( 'ABSPATH' ) )"
           start = src.index(marker)
           tail = "RAR_Woo_Smart_Courier::instance();"
-          before, sep, after = src.rpartition(tail)
+          before, sep, _after = src.rpartition(tail)
           if not sep:
               raise SystemExit("Stable package bootstrap marker not found.")
 
           class_source = "<?php\n" + before[start:].rstrip() + "\n"
-
-          bootstrap = """<?php
-/**
- * Plugin Name: RAR Woo Smart Courier
- * Plugin URI:  https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier
- * Description: Smart multi-courier shipping selector for WooCommerce with configurable zone/weight pricing, ETA-aware recommendation, native free-shipping presentation, custom courier support, and order metadata.
- * Version:     1.3.0
- * Author:      Ruhul Amin
- * Author URI:  https://github.com/ruhulaminrevens
- * Text Domain: rar-woo-smart-courier
- * Requires at least: 6.5
- * Requires PHP: 8.0
- * WC requires at least: 8.0
- */
-
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
-
-define( 'RWSC_VERSION', '1.3.0' );
-define( 'RWSC_FILE', __FILE__ );
-define( 'RWSC_DIR', plugin_dir_path( __FILE__ ) );
-
-require_once RWSC_DIR . 'includes/class-rwsc-plugin.php';
-
-RAR_Woo_Smart_Courier::instance();
-"""
+          bootstrap = (
+              "<?php\n"
+              "/**\n"
+              " * Plugin Name: RAR Woo Smart Courier\n"
+              " * Plugin URI:  https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier\n"
+              " * Description: Smart multi-courier shipping selector for WooCommerce with configurable zone/weight pricing, ETA-aware recommendation, native free-shipping presentation, custom courier support, and order metadata.\n"
+              " * Version:     1.3.0\n"
+              " * Author:      Ruhul Amin\n"
+              " * Author URI:  https://github.com/ruhulaminrevens\n"
+              " * Text Domain: rar-woo-smart-courier\n"
+              " * Requires at least: 6.5\n"
+              " * Requires PHP: 8.0\n"
+              " * WC requires at least: 8.0\n"
+              " */\n\n"
+              "if ( ! defined( 'ABSPATH' ) ) {\n"
+              "    exit;\n"
+              "}\n\n"
+              "define( 'RWSC_VERSION', '1.3.0' );\n"
+              "define( 'RWSC_FILE', __FILE__ );\n"
+              "define( 'RWSC_DIR', plugin_dir_path( __FILE__ ) );\n\n"
+              "require_once RWSC_DIR . 'includes/class-rwsc-plugin.php';\n\n"
+              "RAR_Woo_Smart_Courier::instance();\n"
+          )
 
           Path("includes").mkdir(exist_ok=True)
           Path("includes/class-rwsc-plugin.php").write_text(class_source, encoding="utf-8")
           Path("rar-woo-smart-courier.php").write_text(bootstrap, encoding="utf-8")
-
           for old in ("includes/class-rwsc-engine.php", "includes/class-rwsc-admin.php"):
               p = Path(old)
               if p.exists():
                   p.unlink()
           PY
-
           php -l rar-woo-smart-courier.php
           php -l includes/class-rwsc-plugin.php
           rm -rf .rwsc-build
