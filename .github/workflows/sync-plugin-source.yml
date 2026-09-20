@@ -1,0 +1,44 @@
+name: Sync plugin source
+
+on:
+  push:
+    paths:
+      - ".github/workflows/sync-plugin-source.yml"
+      - "tools/RAR-Woo-Smart-Courier-source-v1.3.0.zip"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract structured plugin source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .rwsc-source
+          mkdir .rwsc-source
+          unzip -q tools/RAR-Woo-Smart-Courier-source-v1.3.0.zip -d .rwsc-source
+          SRC=".rwsc-source/rar-woo-smart-courier"
+          mkdir -p includes
+          cp "$SRC/includes/class-rwsc-engine.php" includes/class-rwsc-engine.php
+          cp "$SRC/includes/class-rwsc-admin.php" includes/class-rwsc-admin.php
+          cp "$SRC/nabiad-smart-courier.php" rar-woo-smart-courier.php
+          cp "$SRC/LICENSE" LICENSE
+          cp "$SRC/.gitignore" .gitignore
+          rm -rf .rwsc-source
+      - name: Commit source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rar-woo-smart-courier.php includes LICENSE .gitignore
+          if git diff --cached --quiet; then
+            echo "Source tree already synchronized."
+            exit 0
+          fi
+          git commit -m "chore: publish structured v1.3.0 plugin source"
+          git push
