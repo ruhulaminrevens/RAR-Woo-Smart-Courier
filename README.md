@@ -1,16 +1,37 @@
 # RAR Woo Smart Courier
 
-**Bangladesh-focused smart multi-courier shipping selector for WooCommerce** — zone, weight, ETA, price, Free Shipping এবং configurable recommendation logic এক জায়গা থেকে manage করার জন্য।
+Production-focused multi-courier shipping selector for WooCommerce, designed for Bangladesh zone-based delivery pricing.
 
-**Current stable release: v1.3.0**
+## Download
 
-Built around the Nabiad.com WooCommerce workflow, but reusable on other WooCommerce stores after merchant-specific rates and zones are configured.
+### [⬇️ Download Stable v1.3.0 Installable ZIP](https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier/raw/main/releases/rar-woo-smart-courier-v1.3.0.zip)
 
-## Latest Download
+### [📦 Download Latest Source ZIP](https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier/archive/refs/heads/main.zip)
 
-**[Download RAR Woo Smart Courier v1.3.0](https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier/raw/main/releases/rar-woo-smart-courier-v1.3.0.zip)**
+### [🔒 Download Stable v1.3.0 Source ZIP](https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier/archive/refs/heads/v1.3.0.zip)
 
-## Default customer display
+**Install:** WordPress → Plugins → Add New → Upload Plugin → choose the **Installable ZIP** → Install Now → Activate.
+
+## Features
+
+- Five built-in courier choices: Pathao, Paperfly, Steadfast, Redx and Sundarban
+- Sixth optional custom courier slot
+- Dhaka / Nearby / Outside Dhaka zone pricing
+- Configurable Nearby districts and cities/areas
+- Weight-aware pricing for ≤1 kg, ≤2 kg and extra kg
+- Separate ETA per courier and delivery zone
+- Smart recommendation: faster ETA → lower rate → lower Priority number
+- Native WooCommerce Free Shipping support
+- Free-shipping orders keep all enabled courier choices selectable at ৳0 while the normal courier charge is shown strike-through
+- Safe Test Mode for administrator/store-manager testing before public rollout
+- Selected courier, ETA and zone stored with WooCommerce shipping/order data
+- Courier display in the classic WooCommerce admin order view/list
+- Compact Cart/Checkout labels for mobile
+- Existing WooCommerce rates remain untouched if the plugin cannot determine a usable base rate
+
+## Storefront format
+
+Normal delivery example:
 
 ```text
 Pathao · 1–2 business days: 70.00৳ · Rec
@@ -20,61 +41,66 @@ Redx · 1–3 business days: 80.00৳
 Sundarban · 1–3 business days: 110.00৳
 ```
 
-Courier name-এর পরে unnecessary “Courier/Delivery” text রাখা হয় না, তাই desktop ও mobile দুই জায়গাতেই list compact থাকে।
+When native WooCommerce Free Shipping is available, the courier options remain selectable and the normal configured amount is displayed with strike-through instead of repeating “Free Delivery” on every row.
 
-## Features
+## Recommendation logic
 
-- Dhaka / Nearby / Outside Dhaka zone-based pricing
-- Weight-aware ≤1kg, ≤2kg and extra/kg rates
-- Configurable ETA per courier and zone
-- Smart recommendation: faster ETA → lower rate → Priority tie-break
-- Compact `· Rec` marker at the end of the recommended line
-- Native WooCommerce Free Shipping compatibility
-- Free Shipping active হলে সব courier selectable at ৳0 এবং normal charge strike-through reference হিসেবে visible
-- Repeated “Free Delivery” text removed
-- Safe Test Mode for admin/store-manager testing
-- Selected courier saved with WooCommerce order/shipping data
-- Courier visible in WooCommerce admin order workflow
-- Mobile-compact courier list
-- Sixth blank Custom Courier slot with editable name, pricing, ETA and priority
-- Configurable Nearby districts and cities/areas
+1. Detect the delivery zone from the checkout address.
+2. Calculate the cart/package weight.
+3. Calculate rate and ETA for each enabled courier.
+4. Prefer the faster ETA.
+5. If ETA ties, prefer the lower normal rate.
+6. If both tie, the lower Priority number wins.
+7. The top choice receives the `· Rec` marker.
 
-## Recommendation workflow
+## Admin settings
 
-1. Customer shipping address থেকে zone determine হয়.
-2. Package weight থেকে courier charge calculate হয়.
-3. Enabled courierগুলোর ETA compare হয়.
-4. Faster ETA first.
-5. ETA tie হলে lower rate first.
-6. ETA + rate tie হলে lower Priority number wins.
-7. First ranked option-এ `· Rec` marker দেখায়.
+Go to **WooCommerce → Smart Courier**.
 
-Priority সবসময় courier force করে না; এটি tie-breaker হিসেবে কাজ করে।
+You can configure Engine ON/OFF, Safe Test Mode, fallback parcel weight, Nearby districts, Nearby cities/areas, courier enable/disable, courier name, Priority, zone prices, ETA values and the optional custom courier.
 
-## Free Shipping behavior
+## Safe production rollout
 
-WooCommerce native Free Shipping available হলে Smart Courier courier choice remove করে না. Actual shipping charge becomes ৳0, while each courier normal configured amount is shown strike-through. “Free Delivery” প্রতিটি line-এ repeat হয় না।
+1. Install and activate the plugin.
+2. Keep **Safe Test Mode ON**.
+3. Test Cart/Checkout with Dhaka, Nearby and Outside addresses.
+4. Test quantity and weight changes.
+5. Test normal paid shipping.
+6. Test native WooCommerce Free Shipping.
+7. Place a COD test order and verify the selected courier in WooCommerce admin.
+8. Turn **Safe Test Mode OFF** only after validation.
 
-## Admin Settings
+## Repository structure
 
-**WordPress Admin → WooCommerce → Smart Courier**
+```text
+RAR-Woo-Smart-Courier/
+├── rar-woo-smart-courier.php
+├── includes/
+│   └── class-rwsc-plugin.php
+├── docs/
+│   ├── INSTALLATION.md
+│   └── screenshots/
+├── releases/
+│   └── rar-woo-smart-courier-v1.3.0.zip
+├── README.md
+├── CHANGELOG.md
+├── readme.txt
+├── LICENSE
+├── uninstall.php
+└── .gitignore
+```
 
-Configure: Engine, Safe Test Mode, fallback weight, Nearby districts/areas, courier enable/disable, Priority, Dhaka/Nearby/Outside rates, ETA এবং Custom Courier.
+## Compatibility
 
-## Installation / Deployment
+- WordPress 6.5+
+- WooCommerce 8.0+
+- PHP 8.0+
+- Uses WooCommerce classic shipping-rate and classic Cart/Checkout hooks
+- Cart/Checkout Blocks compatibility is **not declared** in v1.3.0
 
-1. Download the latest ZIP above.
-2. WordPress → Plugins → Add New → Upload Plugin.
-3. Upload `rar-woo-smart-courier-v1.3.0.zip` and activate.
-4. WooCommerce → Smart Courier.
-5. Keep **Safe Test Mode ON** first.
-6. Test Cart, Checkout, address change, quantity/weight change, paid shipping, Free Shipping and COD order creation.
-7. Confirm the selected courier is saved in the order/admin view.
-8. Then turn **Safe Test Mode OFF** and Save Courier Settings.
+## Upgrade note
 
-### Old WPCode snippet
-
-If **`Nabiad Smart Courier Engine v1.0.0`** still exists in WPCode, keep it **OFF** while this plugin is active. After production verification it can be deleted to avoid accidental double-engine conflicts.
+If an older WPCode/custom Smart Courier engine still exists, keep that old engine **OFF** while this plugin is active. Remove the obsolete duplicate only after production verification so two shipping engines never filter the same WooCommerce rates.
 
 ## Screenshots
 
@@ -87,24 +113,11 @@ If **`Nabiad Smart Courier Engine v1.0.0`** still exists in WPCode, keep it **OF
 ### WooCommerce Admin Order Courier
 ![Admin Order Courier](docs/screenshots/admin-order-courier.jpg)
 
-## Version Update History
+## Version
 
-| Version | Update |
-|---|---|
-| **v1.3.0** | Final line polish, `· Rec` at end, `Redx` naming, realistic ETA defaults, Custom Courier slot, configurable Nearby locations, mobile polish and Free Shipping strike-through behavior. |
-| **v1.2.0** | Settings/admin workflow stabilization with configurable pricing, ETA, priority and improved recommendation/free-shipping presentation. |
-| **v1.1.2** | Free Shipping compatibility/fix. |
-| **v1.1.1** | Safe Test Mode for admin-only verification. |
-| **v1.1.0** | First installable Smart Courier plugin baseline. |
-| **v1.0.0** | Earlier Nabiad Smart Courier Engine WPCode prototype. |
+**v1.3.0 — 2026-09-20**
 
-See **[CHANGELOG.md](CHANGELOG.md)** for release notes.
-
-## Technical Notes
-
-- Requires WordPress + WooCommerce.
-- Uses WooCommerce shipping hooks; it does not pull live courier tariffs from courier APIs.
-- Merchant-specific rates and ETA must be validated before production deployment.
+See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ## License
 
