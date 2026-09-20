@@ -84,9 +84,6 @@ If **`Nabiad Smart Courier Engine v1.0.0`** still exists in WPCode, keep it **OF
 ### Cart Courier Selector
 ![Cart Courier Selector](docs/screenshots/cart-courier-selector.jpg)
 
-### Free Delivery / Order Result
-![Free Delivery Order](docs/screenshots/order-free-delivery.jpg)
-
 ### WooCommerce Admin Order Courier
 ![Admin Order Courier](docs/screenshots/admin-order-courier.jpg)
 
