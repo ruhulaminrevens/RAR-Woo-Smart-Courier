@@ -7,12 +7,12 @@ HPOS-ready, plain PHP (works on Hostinger shared hosting — no Node, no CDNs), 
 
 ## Download
 
-### [⬇️ Download Installable ZIP — v5.1.0](https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier/raw/main/releases/rar-courier-suite-v5.1.0.zip)
+### [⬇️ Download Installable ZIP — v5.1.0](https://github.com/ruhulaminrevens/RAR-Courier-Suite/raw/main/releases/rar-courier-suite-v5.1.0.zip)
 
 WordPress → Plugins → Add New → Upload Plugin → choose the ZIP → Install Now → Activate.
 (Use this ZIP, not GitHub's "Download source code", so the plugin folder is named `rar-courier-suite`.)
 
-> **Note:** this repository previously held the *RAR Woo Smart Courier* checkout shipping selector (v1.3.0). That code is preserved on the [`v1.3.0` branch](https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier/tree/v1.3.0). Courier Suite reads the customer's courier choice from Smart Courier (`_rwsc_selected_courier`) when both are installed.
+> **Note:** this repository (formerly `RAR-Woo-Smart-Courier`) previously held the *RAR Woo Smart Courier* checkout shipping selector (v1.3.0). That code is preserved on the [`v1.3.0` branch](https://github.com/ruhulaminrevens/RAR-Courier-Suite/tree/v1.3.0). Courier Suite reads the customer's courier choice from Smart Courier (`_rwsc_selected_courier`) when both are installed.
 
 ## Features
 
@@ -69,7 +69,7 @@ WordPress 6.2+, WooCommerce 7.9+ (tested up to 10.0), PHP 7.4+.
 
 ## Repository structure
 ```text
-RAR-Woo-Smart-Courier/
+RAR-Courier-Suite/
 ├── rar-courier-suite.php      # plugin bootstrap
 ├── includes/                  # one class per concern (couriers, API, orders, admin, webhook, cron…)
 ├── assets/                    # admin CSS / JS / logo (no build step)

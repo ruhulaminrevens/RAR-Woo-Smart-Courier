@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: RAR Courier Suite
- * Plugin URI:  https://nabiad.com
+ * Plugin URI:  https://github.com/ruhulaminrevens/RAR-Courier-Suite
  * Description: One professional courier control centre for WooCommerce Bangladesh — Pathao, RedX, SteadFast, Paperfly and Sundarban Courier. Unified dashboard and parcel list, safe single/bulk dispatch, duplicate-send protection, status sync, hardened webhooks, COD / advance-payment awareness and RAR Woo Smart Courier routing. HPOS ready. Independent product; not affiliated with or endorsed by any courier company.
  * Version:     5.1.0
  * Author:      Ruhul Amin
