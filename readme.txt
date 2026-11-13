@@ -1,59 +1,23 @@
-=== RAR Woo Smart Courier ===
-Contributors: ruhulaminrevens
-Tags: woocommerce, shipping, courier, delivery, bangladesh
-Requires at least: 6.5
-Tested up to: 7.1
-Requires PHP: 8.0
-Stable tag: 1.3.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+=== RAR Courier Suite ===
+Contributors: ruhulamin
+Requires at least: 6.2
+Tested up to: 6.8
+Requires PHP: 7.4
+Stable tag: 5.1.0
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Smart multi-courier selector for WooCommerce with Bangladesh-focused zone/weight pricing, ETA-aware recommendation, native Free Shipping support and order courier metadata.
+One control centre for Pathao, RedX, SteadFast, Paperfly and Sundarban Courier on WooCommerce — HPOS ready. Independent plugin, not affiliated with the courier companies.
 
 == Description ==
-
-RAR Woo Smart Courier adds configurable courier choices to WooCommerce shipping.
-
-Features:
-* Dhaka / Nearby / Outside zone pricing.
-* Configurable Nearby districts and cities/areas.
-* Weight-aware 1 kg / 2 kg / extra kg charges.
-* Per-zone courier ETA.
-* Smart recommendation by ETA, price and priority.
-* Five built-in couriers plus one optional custom courier.
-* Native WooCommerce Free Shipping support.
-* Safe Test Mode.
-* Selected courier/ETA stored with order shipping data.
-* Compact mobile labels.
-
-The plugin does not fetch live courier API tariffs. Configure and verify merchant-specific rates before production use.
-
-== Installation ==
-
-1. Upload the installable ZIP from WordPress > Plugins > Add New > Upload Plugin.
-2. Activate RAR Woo Smart Courier.
-3. Go to WooCommerce > Smart Courier.
-4. Keep Safe Test Mode ON while testing.
-5. Configure delivery rates, ETA and Nearby locations.
-6. Test normal shipping and native WooCommerce Free Shipping.
-7. Turn Safe Test Mode OFF after validation.
-
-== Frequently Asked Questions ==
-
-= Does it call courier company APIs? =
-No. Version 1.3.0 uses merchant-configured rates and ETA values.
-
-= What happens when WooCommerce Free Shipping applies? =
-Enabled courier choices remain selectable at zero shipping cost and the normal configured amount is shown as strike-through reference.
-
-= Can I add another courier? =
-Yes. A sixth custom courier row is available and disabled by default.
+Safe single/bulk dispatch, duplicate-send protection across couriers, status sync, hardened webhooks, COD/advance-payment awareness and RAR Woo Smart Courier routing. See README.md.
 
 == Changelog ==
+= 5.1.0 =
+Bug-fix and hardening release: Paperfly secrets redacted from logs, settings no longer reset on partial saves, admin notices limited to plugin screens, Pathao bulk actions hidden until connected, uninstall cleanup, docs refreshed. See CHANGELOG.md.
 
-= 1.3.0 =
-* Configurable Nearby locations and custom courier.
-* ETA/rate/priority recommendation.
-* Native Free Shipping presentation improvements.
-* Compact mobile display and order courier metadata.
-* Repository source structure normalized for maintainability.
+= 5.0.0 =
+Adds Paperfly and Sundarban (manual).
+
+= 4.0.0 =
+Adds RedX and SteadFast to the Pathao v3 engine. See CHANGELOG.md.
