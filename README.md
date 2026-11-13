@@ -12,7 +12,7 @@ HPOS-ready, plain PHP (works on Hostinger shared hosting — no Node, no CDNs), 
 WordPress → Plugins → Add New → Upload Plugin → choose the ZIP → Install Now → Activate.
 (Use this ZIP, not GitHub's "Download source code", so the plugin folder is named `rar-courier-suite`.)
 
-> **Note:** this repository previously held the *RAR Woo Smart Courier* checkout shipping selector (v1.3.0). That code is preserved in git history under the tag `smart-courier-v1.3.0`. Courier Suite reads the customer's courier choice from Smart Courier (`_rwsc_selected_courier`) when both are installed.
+> **Note:** this repository previously held the *RAR Woo Smart Courier* checkout shipping selector (v1.3.0). That code is preserved on the [`v1.3.0` branch](https://github.com/ruhulaminrevens/RAR-Woo-Smart-Courier/tree/v1.3.0). Courier Suite reads the customer's courier choice from Smart Courier (`_rwsc_selected_courier`) when both are installed.
 
 ## Features
 
